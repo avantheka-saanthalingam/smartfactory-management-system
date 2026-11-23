@@ -1,0 +1,1 @@
+"""SmartFactory backend package."""
