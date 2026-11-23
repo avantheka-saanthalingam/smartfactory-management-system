@@ -495,3 +495,7 @@ Additional documentation is available in the `docs` directory.
 **SmartFactory - Order-to-Audit ERP**
 
 An integrated demonstration of factory operations, production, inventory, sales, GST billing, payment collection and audit management.
+## Demo Video
+
+[Watch the eight-minute SmartFactory demonstration](https://drive.google.com/file/d/1XjxQ2CofUY34Q04li6yXxbKkzyjNUoGu/view?usp=sharing)
+
