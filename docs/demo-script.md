@@ -1,19 +1,19 @@
-# Eight-minute SmartFactory demo script
+﻿# Eight-minute SmartFactory demo script
 
-**0:00–0:40 — Context.** Introduce SmartFactory as an order-to-audit operations desk for a small Tamil Nadu packaged-food unit. The demonstration starts with a seeded Murukku 200 g recipe and exact assignment opening stocks. Explain that every stock change is a source-referenced ledger movement.
+**0:00–0:40 — Introduction.** Introduce SmartFactory as an order-to-audit operations workspace for a small Tamil Nadu packaged-food manufacturer. Explain that the demonstration uses the Murukku 200 g product, a defined bill of materials and source-referenced stock movements.
 
-**0:40–1:20 — Roles and overview.** Sign in with the Admin demo account. Point out net sales, open orders, finished goods and receivables. Switch roles using logout and the quick role selector to show that Salesman, Supervisor, Owner and Auditor have role-specific actions.
+**0:40–1:30 — Login and dashboard.** Sign in as Admin. Show the dashboard, sales and production overview, operational alerts, recent orders and inventory health. Point out the reporting period and the navigation sections. Explain that access and available actions depend on the signed-in role.
 
-**1:20–2:20 — BOM and costing.** Open Production. Walk through 40 kg flour, 10 L oil, 1.2 kg spice, 200 pouches and 10 cartons per 200-packet batch. Explain the starting ₹42/kg flour rate and the weighted-average method after purchasing at ₹45/kg.
+**1:30–2:10 — Mobile salesman experience.** Open the application in a mobile-sized browser viewport and sign in as Salesman A. Show the mobile navigation and sales-order workflow. Explain how a salesperson can submit an order for a customer and product. Sign out when finished.
 
-**2:20–3:30 — Benchmark production.** Click Run benchmark. Review 188 good packets from 200 expected, 6% yield variance, +5% oil issue variance and the >3% warning. Explain that the six damaged pouches are returned to the ledger in QC quarantine to match the assignment's 306 total pouch balance; 300 remain available for production. Check flour 120 kg, oil 19.5 L, spice 3.8 kg, cartons 21, finished goods 238 before dispatch and 88 after dispatch.
+**2:10–3:10 — Production and BOM.** Sign back in as Admin and open Production. Show the Murukku 200 g BOM: 40 kg flour, 10 L cooking oil, 1.2 kg spice mix, 200 pouches and 10 cartons per standard batch. Explain weighted-average material valuation and the planned-versus-actual consumption chart.
 
-**3:30–4:30 — Sales and GST.** Open Sales orders and show the 150-packet Retailer A Tamil Nadu order. Generate or view its financial-year invoice. Explain ₹7,500 taxable value, ₹187.50 CGST, ₹187.50 SGST and ₹7,875 total. The built-in scenario dispatches this order and creates a second 120-packet Karnataka order with a 32-packet shortage alert.
+**3:10–4:00 — Production results and inventory.** Show the existing benchmark results: 188 good packets from 200 expected, a −6% yield variance and +5% oil consumption variance. Explain the six damaged pouches and QC quarantine. Open Inventory and show on-hand versus available quantities, raw materials, packaging and source-referenced stock movements. Do not click Run benchmark or Re-run benchmark: the benchmark data is already loaded.
 
-**4:30–5:10 — Collection.** Open GST billing and show the ₹4,000 receipt against Retailer A's invoice, leaving ₹3,875 outstanding. Download the invoice PDF.
+**4:00–5:10 — Sales orders and GST.** Open Sales orders. Show the Retailer A order for 150 packets and its completed workflow. Explain the admin approval, invoice generation and dispatch actions. Show the invoice figures: ₹7,500 taxable value, ₹187.50 CGST, ₹187.50 SGST and ₹7,875 total. Point out the separate Distributor B order for 120 packets and its 32-packet stock-shortage warning.
 
-**5:10–6:10 — Inventory and traceability.** Open Inventory and point out raw/packaging separation, available versus QC-quarantined stock, source references, purchase/production/dispatch movements and adjustment controls. Emphasize transactional rollback on failed production/dispatch.
+**5:10–6:00 — Billing and collection.** Open GST billing. Show the invoice, outstanding balance and payment history reflected in the billing summary. Point out the PDF download and Record payment controls. The seeded demonstration already includes a ₹4,000 receipt against the Retailer A invoice, leaving ₹3,875 outstanding. Do not submit the payment again.
 
-**6:10–7:10 — Reports.** Open Monthly reports. Export a GST summary, production report, material ledger and receivables aging to CSV, Excel or PDF. Explain the integer-paisa storage and Decimal quantity handling.
+**6:00–7:00 — Reports.** Open Reports and show the available operational and finance report cards, including GST summary, production, material ledger and receivables. Point out the CSV, Excel and PDF export options. Demonstrate only an export that has been tested successfully; do not claim that every report-format combination has been verified.
 
-**7:10–8:00 — Close.** Show Swagger at `/docs`, mention automated tests and SQLite-to-PostgreSQL URL migration, and state current production-readiness boundaries: validate real tax master data, tenant/security policy, backups and live invoice/credit-note regulations before commercial deployment.
+**7:00–8:00 — Technical close.** Open the API documentation at `/docs` and show the health endpoint. Mention FastAPI, React, SQLAlchemy and the database configuration. State that the automated test suite passes (5 tests). Close by explaining that real commercial deployment still requires validation of tax master data, security and tenant policies, backups, and applicable invoice and credit-note requirements.
