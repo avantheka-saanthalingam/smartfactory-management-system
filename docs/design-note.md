@@ -1,4 +1,4 @@
-# SmartFactory design note
+﻿# SmartFactory design note
 
 ## BOM and production runs
 The Murukku 200 g standard BOM represents one 200-packet batch: 40 kg flour, 10 L oil, 1.2 kg spice mix, 200 pouches and 10 cartons. A production run records the BOM-scaled plan beside actual issued quantities, actual good output, damaged packaging, labour, utilities and its production date. A single SQLAlchemy session/transaction records material issues, any quarantine return, finished-goods output and the run cost; exceptions roll back the transaction. The yield formula is `(actual good packets − expected packets) / expected packets × 100`. Consumption variance is `(actual issue − planned issue) / planned issue × 100`; dashboard alerts are raised when the absolute consumption variance exceeds 3%.
@@ -11,3 +11,33 @@ Raw-material rates use weighted-average valuation on each purchase: `new average
 
 ## GST demonstration and known boundaries
 Taxable value is quantity × pre-tax rate; GST is stored in paisa. Tamil Nadu deliveries split the 5% benchmark tax into 2.5% CGST and 2.5% SGST; other-state deliveries use 5% IGST. ₹7,500 taxable therefore yields ₹187.50 each CGST and SGST and a ₹7,875 invoice. This is an assignment demonstration, not a statutory compliance opinion. The sample HSN and GSTIN values are demo values; validate registration, HSN, applicable rates, invoice fields, e-invoicing/e-way-bill requirements, rounding, credit note process and financial-year sequences with an accountant before live use.
+## Data model and relationships
+
+The application uses SQLAlchemy models with a relational database. The main relationships are shown below.
+
+```mermaid
+erDiagram
+    ROLE ||--o{ USER : assigns
+    USER ||--o{ ORDER : submits
+    USER ||--o{ AUDIT_LOG : performs
+    CUSTOMER ||--o{ ORDER : places
+    PRODUCT ||--o{ ORDER : sold
+    PRODUCT ||--o{ BOM_ITEM : defines
+    MATERIAL ||--o{ BOM_ITEM : consumes
+    SUPPLIER ||--o{ PURCHASE : supplies
+    PURCHASE ||--o{ PURCHASE_ITEM : contains
+    MATERIAL ||--o{ PURCHASE_ITEM : received
+    PRODUCT ||--o{ PRODUCTION_RUN : produced
+    MATERIAL ||--o{ STOCK_MOVEMENT : tracks
+    PRODUCT ||--o{ STOCK_MOVEMENT : tracks
+    ORDER ||--o| INVOICE : billed
+    INVOICE ||--o{ PAYMENT : settled
+```
+
+
+The core master tables are users, roles, customers, suppliers, products and materials. bom_items connects products to their required materials. Purchasing is represented by purchases and purchase_items; production by production_runs; and inventory history by stock_movements. Sales orders connect customers, salesmen and products, while invoices and payments track billing and settlement. audit_logs records user actions and timestamps. Stock movements retain source-document references for traceability.
+
+
+
+
+
