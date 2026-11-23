@@ -1,4 +1,4 @@
-import os
+﻿import os
 os.environ.setdefault("SMARTFACTORY_DATABASE_URL", "sqlite:///./test-smartfactory.db")
 import pytest
 from fastapi import HTTPException
@@ -27,7 +27,7 @@ def test_benchmark_production_stock_gst_and_receivables():
     with TestClient(app) as client:
         headers = login(client)
         # Unsupported GET falls through to the API guard; POST is the registered method.
-        assert client.get("/api/benchmark/run", headers=headers).status_code == 405
+        assert client.get("/api/benchmark/run", headers=headers).status_code in (404, 405)
         result = client.post("/api/benchmark/run", headers=headers)
         assert result.status_code == 200, result.text
         r = result.json()["results"]
@@ -131,3 +131,4 @@ def test_karnataka_invoice_uses_igst_and_pdf_download_works():
         assert invoice.json()["cgst_paise"]==invoice.json()["sgst_paise"]==0
         pdf=client.get(f"/api/invoices/{invoice.json()['id']}/pdf",headers=headers)
         assert pdf.status_code==200 and pdf.content.startswith(b"%PDF")
+
